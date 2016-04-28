@@ -42,6 +42,8 @@ class Nosto_Tagging_Model_Observer
      */
     const XML_LAYOUT_PAGE_DEFAULT_FOOTER_HANDLE = 'nosto_tagging_page_default_footer';
 
+    private $cartHandled = false;
+
     /**
      * Adds Nosto footer block at the end of the content block.
      *
@@ -58,6 +60,50 @@ class Nosto_Tagging_Model_Observer
             $layout = $observer->getEvent()->getLayout()->getUpdate();
             $layout->addHandle(self::XML_LAYOUT_PAGE_DEFAULT_FOOTER_HANDLE);
         }
+
+        return $this;
+    }
+
+    /*
+     *
+     */
+    public function handleCart(Varien_Event_Observer $observer)
+    {
+        if ($this->cartHandled) {
+            return $this;
+        }
+        $this->cartHandled = true;
+
+        Mage::log(
+            sprintf(
+                'Catched event %s',
+                $observer->getEvent()->getName()
+            ),
+            null,
+            'nosto-events.log',
+            true
+        );
+
+        /* @var $cart Mage_Checkout_Model_Cart */
+        $cart = Mage::getSingleton('checkout/cart');
+
+        /* @var $cookie Mage_Core_Model_Cookie */
+        $cookie = Mage::getModel('core/cookie');
+
+        $nostoCart = Mage::getModel('nosto_tagging/meta_cart');
+        $nostoCart->loadData($cart);
+
+        $items = array();
+
+        $cookie->set(
+            Nosto_Tagging_Helper_Data::DATA_CART_COOKIE_NAME,
+            'test content' . time(),
+            time()+86400,
+            null,
+            null,
+            false,
+            false
+        );
 
         return $this;
     }

@@ -66,6 +66,14 @@
             </nosto_tagging_resource>
         </models>
         <events>
+            <custom_quote_process>
+                <observers>
+                    <nosto_tagging_handle_cart>
+                        <class>Nosto_Tagging_Model_Observer</class>
+                        <method>handleCart</method>
+                    </nosto_tagging_handle_cart>
+                </observers>
+            </custom_quote_process>
             <catalog_product_save_commit_after>
                 <observers>
                     <nosto_tagging_catalog_product_save_commit_after>

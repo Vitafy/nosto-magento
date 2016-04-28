@@ -50,6 +50,16 @@ class Nosto_Tagging_Helper_Data extends Mage_Core_Helper_Abstract
     const COOKIE_NAME = '2c_cId';
 
     /**
+     * @var string the name of the cookie where the cart contents is stored.
+     */
+    const DATA_CART_COOKIE_NAME = '2c.crt';
+
+    /**
+     * @var string the name of the cookie where the customer info is stored.
+     */
+    const DATA_CUSTOMER_COOKIE_NAME = '2c.csr';
+    
+    /**
      * @var string the name of the cookie where the Nosto ID can be found.
      */
     const VISITOR_HASH_ALGO = 'sha256';
