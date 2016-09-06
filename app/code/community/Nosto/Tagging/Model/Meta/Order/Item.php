@@ -113,7 +113,7 @@ class Nosto_Tagging_Model_Meta_Order_Item extends Mage_Core_Model_Abstract imple
                 Zend_Log::WARN,
                 Nosto_Tagging_Model_Base::LOG_FILE_NAME
             );
-            $args['unitPrice'] = '';
+            $args['unitPrice'] = 0;
         }
         if (!isset($args['currencyCode']) || empty($args['currencyCode'])) {
             Mage::log(
